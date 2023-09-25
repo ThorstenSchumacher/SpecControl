@@ -1,0 +1,39 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>dwbb.png</file>
+    <file>ribb.png</file>
+    <file>upbb.png</file>
+    <file>screenmode.png</file>
+    <file>lebb.png</file>
+    <file>info.png</file>
+    <file>infob.png</file>
+    <file>imageb.png</file>
+    <file>image.png</file>
+    <file>play.png</file>
+    <file>playb.png</file>
+    <file>summeb.png</file>
+    <file>summe.png</file>
+    <file>takeimage.png</file>
+    <file>takeimageb.png</file>
+    <file>recordb.png</file>
+    <file>settings.png</file>
+    <file>settingsb.png</file>
+    <file>measure.png</file>
+    <file>measureb.png</file>
+    <file>pauseb.png</file>
+    <file>pause.png</file>
+    <file>record.png</file>
+    <file>exit.png</file>
+    <file>help.png</file>
+    <file>minimize.png</file>
+    <file>save.png</file>
+    <file>dw.png</file>
+    <file>dwb.png</file>
+    <file>le.png</file>
+    <file>leb.png</file>
+    <file>ri.png</file>
+    <file>rib.png</file>
+    <file>up.png</file>
+    <file>upb.png</file>
+  </qresource>
+</RCC>
