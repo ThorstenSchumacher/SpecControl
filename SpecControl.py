@@ -40,6 +40,8 @@ from interface_spectrometer.analyseclasses import Integratedspec, Wlanalyse
 ##############################################################################################################################################
 #                                                          MAIN WINDOW                                                                       #
 ##############################################################################################################################################
+# to create single exe incl. icon (e.g. TaskManager ...) use in pyintaller ....  "pyinstaller --onefile --noconsole --icon=confs/SWicon.png SpecControl.py"
+
 
 class spectrometerwin(QMainWindow):
     
@@ -264,7 +266,7 @@ class spectrometerwin(QMainWindow):
     def connect2cam(self):
         if self.ui.pushButton_comconnect.text() == "connect":
             self.statusmessage("connecting")
-            self.mycam = cv2.VideoCapture(int(self.ui.comboBox_camport.currentText()))      # , cv2.CAP_MSMF  is suggested backend but also default
+            self.mycam = cv2.VideoCapture(int(self.ui.comboBox_camport.currentText()), cv2.CAP_DSHOW)  # , cv2.CAP_MSMF is suggested backend but also default, cv2.CAP_DSHOW comes from chatGPT
             #print(self.mycam.getBackendName())
             
             self.ui.pushButton_comconnect.setText("disconnect")
@@ -273,6 +275,9 @@ class spectrometerwin(QMainWindow):
                 self.mycam.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'))
                 self.mycam.set(cv2.CAP_PROP_FRAME_WIDTH, self.resolution[0])
                 self.mycam.set(cv2.CAP_PROP_FRAME_HEIGHT, self.resolution[1])
+                #self.mycam.set(cv2.CAP_PROP_AUTO_WB, 0.75) # thies deactivates white balance
+                #self.mycam.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25) # deactivates auto exposure
+                #self.mycam.set(cv2.CAP_PROP_FPS, 30)
                 self.setexposuretime() # to update slider and labels
                 self.setbrightness() # to update slider and labels
                 self.setgain() # ... what is now the averager ... to update slider and labels
@@ -385,7 +390,8 @@ class spectrometerwin(QMainWindow):
     def setbrightness(self):    # update brightness (not sure if that makes any sense)
         self.ui.label_bright.setText(str(self.ui.horizontalSlider_bright.value()))
         if self.runcam == True:
-            self.mycam.set(cv2.CAP_PROP_BRIGHTNESS, self.ui.horizontalSlider_bright.value())
+            #self.mycam.set(cv2.CAP_PROP_BRIGHTNESS, self.ui.horizontalSlider_bright.value())
+            self.mycam.set(cv2.CAP_PROP_GAIN , self.ui.horizontalSlider_gain.value())
 
     def setgain(self):
         self.ui.label_aver.setText(str(self.ui.horizontalSlider_gain.value()))
