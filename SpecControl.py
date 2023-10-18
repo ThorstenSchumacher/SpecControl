@@ -867,7 +867,8 @@ class Showlivespec(QMainWindow):
         self.ui.label_30.setStyleSheet("color:#bebebe; background-color: transparent; border-color: transparent; font-size: 10pt; font-weight:600") ## to keep the format
         self.ui.label_31.setStyleSheet("color:#bebebe; background-color: transparent; border-color: transparent; font-size: 10pt; font-weight:600") ## to keep the format
         self.ui.label_32.setVisible(False) # saturation alert label
-
+        self.setWindowIcon(QIcon('confs/SWicon.png'))  # use this icon on the OS
+        self.setWindowTitle("live-spectrum")  # this is the Frame Title (shown as WindowName in OS)
         self.show()
         self.move(120, 1080-790)
         self.ui.MplWidget.canvas.mpl_connect('button_press_event', self.waitonwindowclick)      # if clicked on mpl then start function that writes coordinates into MplWidget
