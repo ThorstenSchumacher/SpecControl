@@ -11,7 +11,6 @@ class CamreadWorker(qtc.QRunnable):
         self.parentwin.camreadupdate()
         
 
-
 class LivecamWorker(qtc.QRunnable):
     
     def __init__(self, *args, **kwargs):
@@ -31,12 +30,12 @@ class LivespecWorker(qtc.QRunnable):
         self.parentwin.specplotupdate()
 
 
-class Devupdater(qtc.QRunnable):
+class Camconnect(qtc.QRunnable):
     def __init__(self, *args, **kwargs):
-        super(Devupdater, self).__init__()
+        super(Camconnect, self).__init__()
         self.parentwin = args[0]
     
     def run(self):
-        self.parentwin.devupdate()
+        self.parentwin.connect2cam()
 
 

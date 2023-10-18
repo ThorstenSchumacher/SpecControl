@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>458</width>
-    <height>298</height>
+    <height>859</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
      <x>0</x>
      <y>10</y>
      <width>451</width>
-     <height>281</height>
+     <height>321</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -817,9 +817,9 @@ color: white;</string>
    <widget class="QLabel" name="label_status">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>150</x>
       <y>5</y>
-      <width>181</width>
+      <width>211</width>
       <height>31</height>
      </rect>
     </property>
@@ -838,8 +838,8 @@ border-color: transparent;</string>
   <widget class="QPushButton" name="pushButton_exit">
    <property name="geometry">
     <rect>
-     <x>415</x>
-     <y>22</y>
+     <x>420</x>
+     <y>20</y>
      <width>20</width>
      <height>20</height>
     </rect>
@@ -865,11 +865,11 @@ QPushButton:hover {
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_help">
+  <widget class="QPushButton" name="pushButton_screenmode">
    <property name="geometry">
     <rect>
-     <x>390</x>
-     <y>22</y>
+     <x>395</x>
+     <y>20</y>
      <width>20</width>
      <height>20</height>
     </rect>
@@ -879,9 +879,48 @@ QPushButton:hover {
 	border: none;
 	border-radius: 0px;
 	background-color: rgb(100,100,100);
-	background-image: url(:/icons/help.png);
+	background-image: url(:/icons/screenmode.png);
 	color: white;
 	font: 10pt &quot;MS Shell Dlg 2&quot;;
+}
+
+QPushButton:hover {
+	background-color: rgb(100, 150, 200);
+	color: white;
+}
+
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_mini">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>20</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>MS Shell Dlg 2</family>
+     <pointsize>10</pointsize>
+     <weight>9</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+	border: none;
+	border-radius: 0px;
+	background-color: rgb(100,100,100);
+	background-image: url(:/icons/minimize.png);
+	color: white;
+	font: 75 10pt &quot;MS Shell Dlg 2&quot;;
 }
 
 QPushButton:hover {

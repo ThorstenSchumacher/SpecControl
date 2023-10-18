@@ -19,6 +19,7 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QLabel,
     QPushButton, QSizePolicy, QSlider, QWidget)
 
 from interface_spectrometer.mplwidget_specplotter import MplWidget
+import graphics.buttons_rc
 
 class Ui_specplottingwin(object):
     def setupUi(self, specplottingwin):
@@ -305,6 +306,30 @@ class Ui_specplottingwin(object):
 "\n"
 "")
         self.label_32.setWordWrap(False)
+        self.pushButton_mini = QPushButton(self.frame)
+        self.pushButton_mini.setObjectName(u"pushButton_mini")
+        self.pushButton_mini.setGeometry(QRect(1670, 10, 20, 20))
+        font = QFont()
+        font.setFamilies([u"MS Shell Dlg 2"])
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        self.pushButton_mini.setFont(font)
+        self.pushButton_mini.setStyleSheet(u"QPushButton {\n"
+"	border: none;\n"
+"	border-radius: 0px;\n"
+"	background-color: rgb(100,100,100);\n"
+"	background-image: url(:/icons/minimize.png);\n"
+"	color: white;\n"
+"	font: 75 10pt \"MS Shell Dlg 2\";\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"	background-color: rgb(100, 150, 200);\n"
+"	color: white;\n"
+"}\n"
+"\n"
+"")
 
         self.retranslateUi(specplottingwin)
 
@@ -330,5 +355,6 @@ class Ui_specplottingwin(object):
         self.label_30.setText(QCoreApplication.translate("specplottingwin", u"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600; color:#bebebe;\">--</span></p></body></html>", None))
         self.label_31.setText(QCoreApplication.translate("specplottingwin", u"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600; color:#bebebe;\">--</span></p></body></html>", None))
         self.label_32.setText(QCoreApplication.translate("specplottingwin", u"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600; color:#ff0000;\">SATURATION ALERT!!!</span></p></body></html>", None))
+        self.pushButton_mini.setText("")
     # retranslateUi
 

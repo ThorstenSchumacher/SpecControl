@@ -618,6 +618,45 @@ border-width: 1px;
      <bool>false</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_mini">
+    <property name="geometry">
+     <rect>
+      <x>1670</x>
+      <y>10</y>
+      <width>20</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Shell Dlg 2</family>
+      <pointsize>10</pointsize>
+      <weight>9</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+	border: none;
+	border-radius: 0px;
+	background-color: rgb(100,100,100);
+	background-image: url(:/icons/minimize.png);
+	color: white;
+	font: 75 10pt &quot;MS Shell Dlg 2&quot;;
+}
+
+QPushButton:hover {
+	background-color: rgb(100, 150, 200);
+	color: white;
+}
+
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
  </widget>
  <customwidgets>
@@ -628,6 +667,8 @@ border-width: 1px;
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../graphics/icons/buttons.qrc"/>
+ </resources>
  <connections/>
 </ui>
