@@ -65,6 +65,7 @@ class spectrometerwin(QMainWindow):
         self.parentwin = parentwin # here we have the parent window (experimental control)
         self.setWindowIcon(QIcon('confs/SWicon.png'))  # use this icon on the OS
         self.setWindowTitle("SpecControl - PrintedLabs")  # this is the Frame Title (shown as WindowName in OS)
+        self.ui.label_38.setOpenExternalLinks(True) # this allows the click the link in the infobox ... label36
         self.ui.frame.setFixedHeight(291)
         self.move(self.parentwin.intwinpos[0], self.parentwin.intwinpos[1]) # move the window to its position
         self.parentwin.intwinpos[1] += 286  #   store in parent window the position for the next interface window
