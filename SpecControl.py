@@ -7,8 +7,9 @@
 # University of Bayreuth - Germany
 # Thorsten.Schumacher@uni-bayreuth.de
 # Version 1.0
+# License: GNU LESSER GENERAL PUBLIC LICENSE Version 3, 29 June 2007
 #                                                                               
-#
+#A slim spectrometer software to generate and calibrate spectra measured on a UVC camera
 ##############################################################################################################################################
 
 
