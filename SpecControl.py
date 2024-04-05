@@ -18,11 +18,12 @@ import cv2
 import numpy as np 
 import sys
 import time
-import nest_asyncio # get rid of async warnings (event loop issue)
-nest_asyncio.apply() 
+#import nest_asyncio # get rid of async warnings (event loop issue)
+#nest_asyncio.apply() 
 from os import getcwd as getfolder
 from os import remove as removefile
 from os.path import exists as fileexists
+from os.path import join as pathjoin
 
 from threading import Thread
 from PySide6.QtWidgets import QMainWindow, QApplication, QFileDialog
@@ -64,13 +65,13 @@ class spectrometerwin(QMainWindow):
         self.ui.label_status.setStyleSheet("color:#ff0000; background-color: transparent; border-color: transparent; font-size: 12pt") ## to keep the format
         self.ui.label.setStyleSheet("color: rgb(240,240,240); font-weight: bold; background-color: transparent; border-color: transparent; font-size: 14pt") ## to keep the format
         self.parentwin = parentwin # here we have the parent window (experimental control)
-        self.setWindowIcon(QIcon('confs/SWicon.png'))  # use this icon on the OS
+        self.setWindowIcon(QIcon(pathjoin(getfolder(), "confs" ,"SWicon.png")))  # use this icon on the OS
         self.setWindowTitle("SpecControl - PrintedLabs")  # this is the Frame Title (shown as WindowName in OS)
         self.ui.label_38.setOpenExternalLinks(True) # this allows the click the link in the infobox ... label36
         self.ui.frame.setFixedHeight(291)
         self.move(self.parentwin.intwinpos[0], self.parentwin.intwinpos[1]) # move the window to its position
         self.parentwin.intwinpos[1] += 286  #   store in parent window the position for the next interface window
-        self.ui.lineEdit_filepath.setText(getfolder()+"\savedata")  # write current folder into the folder linedit
+        self.ui.lineEdit_filepath.setText(pathjoin(getfolder(), "savedata"))  # write current folder into the folder linedit
         self.show()
 
         # available sources (IDs) for cv2
@@ -222,9 +223,10 @@ class spectrometerwin(QMainWindow):
         self.close()                # close UI
 
 
-    def getoldcalibration(self):
-        if fileexists(getfolder()+"\confs\specconfig.npy"):           # check if config gile exists
-            storeddata = np.load("confs\specconfig.npy")              # load it
+    def getoldcalibration(self): 
+
+        if fileexists(pathjoin(getfolder(),"confs","specconfig.npy")):           # check if config gile exists
+            storeddata = np.load(pathjoin(getfolder(),"confs","specconfig.npy"))              # load it
             self.wlaxis =  storeddata[0,:]                          # first col is the wavelength axis 
             self.wlaxiscal =  storeddata[0,:]                          # first col is the wavelength axis we store as calibration wlaxis
             self.specwindow.ui.MplWidget.wlaxis = self.wlaxis   # and we also write it to the plotwidget
@@ -725,12 +727,12 @@ class spectrometerwin(QMainWindow):
             B[4] = 1                        # use adress 4 if ROI is activated
 
         S = np.array([A, B])       # the matrix combining both 
-        np.save("confs\specconfig.npy", S) # also save it as numpy file
+        np.save(pathjoin(getfolder(), "confs", "specconfig.npy"), S) # also save it as numpy file
         self.statusmessage("calibration saved")   #send message
 
     def resetcal(self):
-        if fileexists(getfolder()+"\confs\specconfig.npy"):           # check if a configfile exists and then delete it
-            removefile(getfolder()+"\confs\specconfig.npy")
+        if fileexists(pathjoin(getfolder(), "confs", "specconfig.npy")):           # check if a configfile exists and then delete it
+            removefile(pathjoin(getfolder(), "confs", "specconfig.npy"))
         self.wlaxis = self.pxaxis           # overwrite the wlaxis with the pixelaxis
         if self.specmode == True:                     #if we have the spectrumplot running, update its wlaxis
             self.specwindow.ui.MplWidget.wlaxis = self.pxaxis
@@ -760,9 +762,9 @@ class spectrometerwin(QMainWindow):
             time.sleep(0.01)
 
     def bayercorr(self):
-        if fileexists(getfolder()+"\confs\\bayercorrection.csv"):           # check if bayer correction file exists
+        if fileexists(pathjoin(getfolder(), "confs", "bayercorrection.csv")):           # check if bayer correction file exists
             if self.bayercorrmode == False:
-                A = np.loadtxt("confs\\bayercorrection.csv")
+                A = np.loadtxt(pathjoin(getfolder(), "confs", "bayercorrection.csv"))
                 wl = A[:,0]     # wavelength of correction
                 bayI = A[:,1]   # corresponding intensity
                 self.bayerspec = np.interp(self.wlaxis, wl, bayI)       # compute interpolation ... extrapolation is constant the first/last value of bayercorr file
@@ -802,12 +804,12 @@ class spectrometerwin(QMainWindow):
             
             #check if autoadd image number is checker
             if self.ui.checkBox_autoaddimgnumber.isChecked() == False:
-                fullpath = fpath+"\\"+fname+"."+fformat
-                fullpathnpy = fpath+"\\"+fname+"."+"npy"
+                fullpath = pathjoin(fpath, fname +"."+ fformat)
+                fullpathnpy = pathjoin(fpath, fname +"." + "npy")
 
             elif self.ui.checkBox_autoaddimgnumber.isChecked() == True:
-                fullpath = fpath+"\\"+fname+imgnumber+"."+fformat
-                fullpathnpy = fpath+"\\"+fname+imgnumber+"."+"npy"
+                fullpath = pathjoin(fpath, fname + imgnumber + "." + fformat)
+                fullpathnpy = pathjoin(fpath, fname + imgnumber + "." + "npy")
 
                 # increase image number
                 numb = int(imgnumber)
@@ -824,7 +826,7 @@ class spectrometerwin(QMainWindow):
             np.save(fullpathnpy, S) # also save it as numpy file
 
             # save spectrum as image
-            self.specwindow.ui.MplWidget.saveimg(fpath+"\\"+fname+imgnumber+"."+"png")
+            self.specwindow.ui.MplWidget.saveimg(pathjoin(fpath, fname + imgnumber + "." + "png"))
 
         else:
             self.statusmessage("no spectrum to save")
@@ -839,9 +841,9 @@ class spectrometerwin(QMainWindow):
         
         #check if autoadd image number is checker
         if self.ui.checkBox_autoaddimgnumber.isChecked() == False:
-            fullpath = fpath+"\\"+fname+"."+fformat
+            fullpath = pathjoin(fpath, fname + "." + fformat )
         elif self.ui.checkBox_autoaddimgnumber.isChecked() == True:
-            fullpath = fpath+"\\"+fname+imgnumber+"."+fformat
+            fullpath = pathjoin(fpath, fname + imgnumber + "." + fformat)
             self.ui.lineEdit_imgnumber.setText(imgnumber)
 
         cv2.imwrite(fullpath, frame) # now save that thing
